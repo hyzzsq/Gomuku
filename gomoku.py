@@ -20,7 +20,7 @@ def is_bounded(board, y_end, x_end, length, d_y, d_x):
         bounded_start=True
     if (x_bound_end<0 or y_bound_end<0) or (x_bound_end>=size or y_bound_end>=size):
         bounded_end=True
-    elif board[y_bound_start][x_bound_start]!=" ":
+    elif board[y_bound_end][x_bound_end]!=" ":
         bounded_end=True
     if bounded_start and bounded_end:
         return "CLOSED"
@@ -36,7 +36,7 @@ def detect_col(board,col,y_start, x_start, length, d_y,d_x):
     if (y_start-d_y)>=0 and (x_start-d_x)>=0 and (x_start-d_x)<len(board):
         if board[y_start-d_y][x_start-d_x]==col:
             return False
-    if (y_start+d_y)<len(board) and (x_start+d_x)>=0 and (x_start+d_x)<len(board):
+    if (y_start+d_y*length)<len(board) and (x_start+d_x*length)>=0 and (x_start+d_x*length)<len(board):
         if board[y_start+d_y*length][x_start+d_x*length]==col:
             return False        
     return True
@@ -121,6 +121,7 @@ def score(board):
             10   * semi_open_b[3]                +  
             open_b[2] + semi_open_b[2] - open_w[2] - semi_open_w[2])
 
+def is_full(board):
     for i in range(len(board)):
         for j in range(len(board)):
             if board[i][j]==" ":
